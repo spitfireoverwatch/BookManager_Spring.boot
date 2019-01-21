@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring.Boot BookManager</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div th:if="${not #lists.isEmpty(books)}">
+    <h2>Список книг:</h2>
+    <table class="glyphicon glyphicon-calendar">
+        <tr>
+            <th>Id</th>
+            <th>Название книги:</th>
+            <th>Автор книги:</th>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.bookTitle}"></td>
+            <td th:text="${book.bookAuthor}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

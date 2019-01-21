@@ -1,0 +1,10 @@
+#common
+/target
+readme.txt
+#IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+
+
