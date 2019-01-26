@@ -23,11 +23,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book getBook(Integer id) {
         //return bookRepository.findOne(id);
-        Optional<Book> book = this.bookRepository.findById(id);
-        if (book.isPresent()) {
-            return book.get();
+        Optional<Book> optionalBook = this.bookRepository.findById(id);
+        if (optionalBook.isPresent()) {
+            return optionalBook.get(); // If a value is present in this Optional, returns the value, otherwise throws NoSuchElementException.
         } else {
-            return null;
+            return null; // should i return null or empty entity with the special field?
         }
     }
 
@@ -42,17 +42,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBook(Integer id) {
-        try {
-            deleteBook(getBook(id));
-        } catch (NullPointerException e) {
-            System.out.println("There is no Entity with such ID");
-        }
+    public void deleteBookById(Integer id) {
+        bookRepository.deleteById(id);
     }
 
     @Override
     public List<Book> getAllBooks(int pageNumber, int pageSize) {
-        //return bookRepository.findAll(new PageRequest(pageNumber, pageSize)).getContent();
         return bookRepository.findAll(PageRequest.of(pageNumber, pageSize)).getContent();
     }
 

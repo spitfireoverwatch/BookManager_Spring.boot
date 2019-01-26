@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Spring.Boot BookManager</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
+</head>
+    <body>
+        <h1>Управление базой данных книг</h1>
+        <a th:href="@{/books/new}">Добавить книгу</a>
+        </br>
+        <a th:href="@{/books/search}">Искать книги</a>
+        </br>
+        <a th:href="@{/books/list}">Вывести полный список книг</a>
+    </body>
+</html>

@@ -3,10 +3,13 @@
 <head>
     <title>Spring.Boot BookManager</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
 </head>
 <body>
+<a th:href="@{/books/new}">Добавить книгу</a>
+<br/>
 <div th:if="${not #lists.isEmpty(books)}">
-    <h2>Список книг:</h2>
+    <h1>Список книг:</h1>
     <table class="glyphicon glyphicon-calendar">
         <tr>
             <th>Id</th>
@@ -17,8 +20,15 @@
             <td th:text="${book.id}"></td>
             <td th:text="${book.bookTitle}"></td>
             <td th:text="${book.bookAuthor}"></td>
+            <td><a th:href="@{'/books/edit/' + ${book.id}}">Изменить</a></td>
+            <td><a th:href="@{'/books/delete/' + ${book.id}}">Удалить</a></td>
         </tr>
     </table>
 </div>
+<div th:if="${#lists.isEmpty(books)}">
+    <p>Список книг пуст!</p>
+</div>
+    </br>
+    <a th:href="@{/index}">Назад</a>
 </body>
 </html>

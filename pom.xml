@@ -51,6 +51,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Spring Boot Developer Tools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- embedded h2 database -->
         <dependency>
             <groupId>com.h2database</groupId>

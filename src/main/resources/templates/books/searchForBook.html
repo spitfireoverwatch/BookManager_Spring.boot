@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Spring.Boot BookManager</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+    <h1>Поиск информации о книгах</h1>
+    <form action="#" th:action="@{/processSearchForm}" th:object="${book}" method="post">
+        <p>Строгий поиск по ID книги: <input type="number" th:field="*{id}"/></p>
+        <p>Поиск по названию книги: <input type="text" th:field="*{bookTitle}"/></p>
+        <p>Поиск по имени автора книги: <input type="text" th:field="*{bookAuthor}"/></p>
+        <p><button type="submit" class="btn btn-default">Искать книгу</button></p>
+    </form>
+    </br>
+    <a th:href="@{/index}">Назад</a>
+
+</body>
+</html>
