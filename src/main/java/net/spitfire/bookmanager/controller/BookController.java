@@ -52,29 +52,7 @@ public class BookController {
 
     @PostMapping("/processSearchForm")
     public String processSearchForm(Book bookToFind, Model model) {
-        List<Book> foundBooks = new ArrayList<>();
-        // strict search by ID
-        if (bookToFind.getId() != null && bookService.getBook(bookToFind.getId()) != null) {
-            foundBooks.add(bookService.getBook(bookToFind.getId()));
-        }
-        // custom H2 search for book by title & author instead of JPARepository SQL-methods
-        else if (bookToFind.getId() == null)
-            {
-            for (Book currentBook : bookService.getAllBooks())
-                {
-                    if (bookToFind.getBookTitle()!= "" && currentBook.getBookTitle().toLowerCase().contains(bookToFind.getBookTitle().toLowerCase()))
-                    {
-                        foundBooks.add(currentBook);
-                    }
-                    else if (bookToFind.getBookAuthor() != "" && currentBook.getBookAuthor().toLowerCase().contains(bookToFind.getBookAuthor().toLowerCase()))
-                    {
-                        foundBooks.add(currentBook);
-                    }
-                }
-            }
-
-        //Collection<Books> foundBooks = this.books.findByTitles(book.getBookTitle()); // Spring.boot generates methods for SQL
-        model.addAttribute("books", foundBooks);
+        model.addAttribute("books", bookService.getBookByFields(bookToFind));
         return "/books/booksList";
     }
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,31 @@ public class BookServiceImpl implements BookService {
         } else {
             return null; // should i return null or empty entity with the special field?
         }
+    }
+
+    @Override
+    public List<Book> getBookByFields(Book bookToFind) {
+        //Collection<Books> foundBooks = this.books.findByTitles(book.getBookTitle()); // Spring.boot generates methods for SQL
+        List<Book> foundBooks = new ArrayList<>();
+        // strict search by ID
+        if (bookToFind.getId() != null && getBook(bookToFind.getId()) != null) {
+            foundBooks.add(getBook(bookToFind.getId()));
+        }
+        // custom H2 search for book by title & author instead of JPARepository SQL-methods
+        else if (bookToFind.getId() == null) {
+            for (Book currentBook : getAllBooks())
+            {
+                if (!bookToFind.getBookTitle().equals("") && currentBook.getBookTitle().toLowerCase().contains(bookToFind.getBookTitle().toLowerCase()))
+                {
+                    foundBooks.add(currentBook);
+                }
+                else if (!bookToFind.getBookAuthor().equals("") && currentBook.getBookAuthor().toLowerCase().contains(bookToFind.getBookAuthor().toLowerCase()))
+                {
+                    foundBooks.add(currentBook);
+                }
+            }
+        }
+        return foundBooks;
     }
 
     @Override
